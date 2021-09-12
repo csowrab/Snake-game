@@ -3,6 +3,11 @@
 ## About:
 A small snake game I made in Python for fun (in under 4 hours).
 
+## Requirements:
+
+* Python (version  3.0 or above)
+* [Pygame](https://pypi.org/project/pygame/)
+
 ## Demo:
 ### Mid-game explanation:
 
