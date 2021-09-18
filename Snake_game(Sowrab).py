@@ -16,12 +16,14 @@ display_height = 600
 
 gameDisplay = pygame.display.set_mode((display_width,display_height))
 
+# Formats text on screen.
 def Create_Text(Text,x,y,size,color):
     largeText = pygame.font.Font('freesansbold.ttf',size)
     TextSurf, TextRect = text_objects(Text, largeText, color)
     TextRect.center = ((x),(y))
     gameDisplay.blit(TextSurf, TextRect)
 
+# Used to create text.
 def text_objects(text, font, red):
     textSurface = font.render(text, True, red)
     return textSurface, textSurface.get_rect()
@@ -37,35 +39,42 @@ class snake():
         self.where = "left"
         self.length = 1
         self.body = []
-        
+    
+    # Direction setter of snake
     def direction(self, direct):
         self.where = direct
 
+    # Get position x
     def get_x(self):
         return self.x
-
+    
+    # Get position y
     def get_y(self):
         return self.y
-
+    
+    # Get which direction it is facing
     def get_dir(self):
         return self.where
-
+    
+    # Speed can be changed only through this class in code.
     def get_speed(self):
         return speed
-
+    
+    # To be added in future...
     def add_body(self):
         pass
         
 
 
-
+# The white square 
 class Food():
 
-    
+    # Start by spawnung food to a random place
     def __init__(self):
         self.x = random.randint(10,590)
         self.y = random.randint(10,590)
-
+    
+    # Spawn on another position after eaten
     def eaten(self):
         self.x = random.randint(0,300)
         self.y = random.randint(0,300)
@@ -78,9 +87,10 @@ class Food():
 
 
 
-
+# Class to contain all objects in game.
 class game():
-
+    
+    # Start by resetting the score.
     def __init__(self, max_score):
         self.score = 0
         self.max_score = max_score
@@ -104,14 +114,16 @@ class game():
             snek.x += snek.speed
         else:
             snek.y += snek.speed
-
+          
+    # A food is eaten when the snake touches the food.
     def check_eaten(self, snek, food):
         if (food.get_x() - rect_size < snek.x  < food.get_x() + rect_size)  and (food.get_y() - rect_size < snek.y < food.get_y() + rect_size):
             return True
         elif (snek.get_x() - rect_size < food.get_x()  < snek.get_x() + rect_size)  and (snek.get_y() - rect_size < food.get_y()  < snek.get_y() + rect_size):
             return True
         return False
-
+ 
+    # If snake reaches border, make it come from the other side of the screen.
     def snek_reflection(self, snek):
         if snek.x > 600:
             snek.x = 0
@@ -122,12 +134,13 @@ class game():
             snek.y = 0
         elif snek.y < 0:
             snek.y = 600
-
+    
+    # Draw body of the snake.
     def draw_snek_rest(self, snek):
         for each in snek.body:
             pygame.draw.rect(gameDisplay, red, (each[0] - 10, each[1] - 10, rect_size, rect_size))
         
-        
+    # Main method to run the program.
     def main(self):
         intro = True
         snek = snake()
@@ -202,7 +215,7 @@ class game():
                     
                 
 
-                    
+# First method to run.                  
 def Game(max_score):
     G = game(max_score)
     G.main()
