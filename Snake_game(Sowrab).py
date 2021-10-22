@@ -69,15 +69,15 @@ class snake():
 # The white square 
 class Food():
 
-    # Start by spawnung food to a random place
+    # Start by spawning food to a random place
     def __init__(self):
-        self.x = random.randint(10,590)
-        self.y = random.randint(10,590)
+        self.x = random.randint(50,590)
+        self.y = random.randint(50,590)
     
     # Spawn on another position after eaten
     def eaten(self):
-        self.x = random.randint(0,300)
-        self.y = random.randint(0,300)
+        self.x = random.randint(50,300)
+        self.y = random.randint(50,300)
 
     def get_x(self):
         return self.x
